@@ -12,7 +12,9 @@ app.use(express.json());
 app.use(cors());
 
 const AuthRouter = require("./routes/auth.js");
+const adminRouter = require("./routes/admin.js");
 app.use(AuthRouter);
+app.use(adminRouter)
 
 connectToDatabase();
 app.listen(PORT, () => {
