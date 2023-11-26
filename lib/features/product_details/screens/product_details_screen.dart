@@ -1,20 +1,24 @@
-import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/home/widgets/address_box.dart';
-import 'package:amazon_clone/features/home/widgets/carausel_image.dart';
-import 'package:amazon_clone/features/home/widgets/deal_of_day.dart';
-import 'package:amazon_clone/features/home/widgets/top_categories.dart';
-import 'package:amazon_clone/features/search/screens/search_screen.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:amazon_clone/common/widgets/stars.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = "/home";
-  const HomeScreen({Key? key}) : super(key: key);
+import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/search/screens/search_screen.dart';
+import 'package:amazon_clone/models/product.dart';
+
+class ProductDetailScreen extends StatefulWidget {
+  static const String routeName = "/product-details";
+  final Product product;
+  const ProductDetailScreen({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -95,23 +99,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            AddressBox(),
-            SizedBox(
-              height: 10,
-            ),
-            TopCategories(),
-            SizedBox(
-              height: 10,
-            ),
-            CarouselImage(),
-            SizedBox(
-              height: 10,
-            ),
-            DealOfDay()
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.product.id!,
+                  ),
+                  Stars(rating: 4)
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

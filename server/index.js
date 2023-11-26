@@ -13,8 +13,10 @@ app.use(cors());
 
 const AuthRouter = require("./routes/auth.js");
 const adminRouter = require("./routes/admin.js");
+const productRouter = require("./routes/product.js");
 app.use(AuthRouter);
 app.use(adminRouter)
+app.use(productRouter)
 
 connectToDatabase();
 app.listen(PORT, () => {
