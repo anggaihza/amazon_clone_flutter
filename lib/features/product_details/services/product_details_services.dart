@@ -26,7 +26,7 @@ class ProductDetailsServices {
           'x-auth-token': userProvider.user.token
         },
         body: jsonEncode(
-          {"id": product.id, "rating": rating},
+          {"id": product.id!, "rating": rating},
         ),
       );
 
