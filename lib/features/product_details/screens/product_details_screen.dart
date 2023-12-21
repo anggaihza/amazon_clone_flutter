@@ -35,10 +35,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     double totalRating = 0;
     for (int i = 0; i < widget.product.rating![i].rating; i++) {
       totalRating += widget.product.rating![i].rating;
-      // if (widget.product.rating![i].userId ==
-      //     Provider.of<UserProvider>(context, listen: false).user.id) {
-      //   myRating = widget.product.rating![i].rating;
-      // }
+      if (widget.product.rating![i].userId ==
+          Provider.of<UserProvider>(context, listen: false).user.id) {
+        myRating = widget.product.rating![i].rating;
+      }
     }
     if (totalRating != 0) {
       avgRating = totalRating / widget.product.rating!.length;
@@ -47,6 +47,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  void addToCart() {
+    productDetailServices.addToCart(
+      context: context,
+      product: widget.product,
+    );
   }
 
   @override
@@ -221,7 +228,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               padding: const EdgeInsets.all(10),
               child: CustomButton(
                 text: "Add to Cart",
-                onTap: () {},
+                onTap: addToCart,
                 color: const Color.fromRGBO(254, 216, 19, 1),
               ),
             ),

@@ -1,6 +1,6 @@
 const adminRouter = require("express").Router()
 const admin = require("../middlewares/admin")
-const Product = require("../models/product")
+const { Product } = require("../models/product")
 
 
 adminRouter.post("/admin/add-product", admin, async (req, res) => {
